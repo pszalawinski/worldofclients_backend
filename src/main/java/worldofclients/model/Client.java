@@ -25,18 +25,22 @@ public class Client {
     private String streetNumber;
     @NotNull
     private String zipCode;
+    private String lat;
+    private String lng;
 
 
     public Client() {
     }
 
-    public Client(@NotNull String companyName, @NotNull String country, @NotNull String city, @NotNull String street, @NotNull String streetNumber, @NotNull String zipCode) {
+    public Client(@NotNull String companyName, @NotNull String country, @NotNull String city, @NotNull String street, @NotNull String streetNumber, @NotNull String zipCode, String lat, String lng) {
         this.companyName = companyName;
         this.country = country;
         this.city = city;
         this.street = street;
         this.streetNumber = streetNumber;
         this.zipCode = zipCode;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public long getId() {
@@ -89,6 +93,7 @@ public class Client {
 
     public String setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
+
         return streetNumber;
     }
 
@@ -101,6 +106,24 @@ public class Client {
         return zipCode;
     }
 
+    public String getLat() {
+        return lat;
+    }
+
+    public String setLat(String lat) {
+        this.lat = lat;
+        return lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public String setLng(String lng) {
+        this.lng = lng;
+        return lng;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
@@ -111,6 +134,8 @@ public class Client {
                 ", street='" + street + '\'' +
                 ", streetNumber='" + streetNumber + '\'' +
                 ", zipCode='" + zipCode + '\'' +
+                ", lat='" + lat + '\'' +
+                ", lng='" + lng + '\'' +
                 '}';
     }
 }

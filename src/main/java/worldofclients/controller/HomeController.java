@@ -1,19 +1,12 @@
-package worldofclients;
+package worldofclients.controller;
 
 
-import net.minidev.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import worldofclients.constans.Constans;
 import worldofclients.model.Client;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import worldofclients.service.ClientService;
 
 @Controller
 public class HomeController {
@@ -39,7 +32,7 @@ public class HomeController {
         client.setCountry(incomeClient.getCountry());
         client.setCompanyName(incomeClient.getCompanyName());
         client.setCity(incomeClient.getCity());
-        String operationResult = clientService.createClient(client).getCompanyName();
+         String operationResult = clientService.createClient(client).getCompanyName();
         return "redirect:/clients@message:client added " + operationResult;
     }
 
@@ -78,6 +71,8 @@ public class HomeController {
         String country = client.setCountry(incomeClient.getCountry());
         String companyName = client.setCompanyName(incomeClient.getCompanyName());
         String city = client.setCity(incomeClient.getCity());
+        String lat = client.setLat(incomeClient.getLng());
+        String lng = client.setLng(incomeClient.getLng());
         String geoLink = Constans.GEO_SERVICE+zipCode+companyName+","+streetName+streetNumber+","+city+","+country+Constans.API_KEY;
 
         return geoLink;

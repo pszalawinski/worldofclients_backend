@@ -1,12 +1,11 @@
-package worldofclients;
+package worldofclients.controller;
 
 
-import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import worldofclients.model.Client;
+import worldofclients.service.ClientService;
 
-import java.net.URI;
 import java.util.List;
 
 @CrossOrigin
@@ -21,17 +20,27 @@ public class ClientRestController {
     }
 
     @GetMapping("api/clients")
-    public List<Client> getClients(){return  clientService.getClients();}
-    @PostMapping("api/clients")
-    public Client createClient(@RequestBody Client client){return clientService.createClient(client);}
-    @DeleteMapping("api/clients/{id}")
-    public ResponseEntity<?> deleteClient(@PathVariable long id){ return clientService.deleteClient(id);}
-    @PutMapping("api/clients/{id}")
-    public Client updateClient(@PathVariable long id, @RequestBody Client client){
-        return clientService.updateClient(id,client);
+    public List<Client> getClients() {
+        return clientService.getClients();
     }
+
+    @PostMapping("api/clients")
+    public Client createClient(@RequestBody Client client) {
+        return clientService.createClient(client);
+    }
+
+    @DeleteMapping("api/clients/{id}")
+    public ResponseEntity<?> deleteClient(@PathVariable long id) {
+        return clientService.deleteClient(id);
+    }
+
+    @PutMapping("api/clients/{id}")
+    public Client updateClient(@PathVariable long id, @RequestBody Client client) {
+        return clientService.updateClient(id, client);
+    }
+
     @GetMapping("api/clients/google/{id}")
-    public String googleString(@PathVariable long id){
+    public String googleString(@PathVariable long id) {
         return clientService.googleUri(id);
     }
 }

@@ -1,4 +1,4 @@
-package worldofclients;
+package worldofclients.repository;
 
 import org.hibernate.sql.Select;
 import org.springframework.data.jpa.repository.JpaRepository;

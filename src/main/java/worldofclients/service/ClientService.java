@@ -1,4 +1,4 @@
-package worldofclients;
+package worldofclients.service;
 
 
 import org.json.JSONArray;
@@ -7,12 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import worldofclients.constans.Constans;
 import worldofclients.model.Client;
+import worldofclients.repository.ClientRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.net.*;
 import java.util.List;
 
@@ -74,7 +74,7 @@ public class ClientService {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-return null;
+                    return null;
                 }
         ).orElseThrow(() -> new RuntimeException(errorMessage));
     }
@@ -87,7 +87,6 @@ return null;
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         // optional default is GET
         con.setRequestMethod("GET");
-
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
@@ -95,18 +94,11 @@ return null;
             response.append(inputLine);
         }
         in.close();
-        //  System.out.println(response.toString());
         JSONObject obj_JSONObject = new JSONObject(response.toString());
         JSONArray results_array = obj_JSONObject.getJSONArray("results");
-          /*  System.out.println(results_array);
-            System.out.println("--" + results_array.length());*/
         JSONObject results = results_array.getJSONObject(0);
-           /* System.out.println("--results---");
-            System.out.println(results);
-            System.out.println(results.getJSONObject("geometry"));*/
         JSONObject geometry_array = results.getJSONObject("geometry");
         JSONObject geometry = geometry_array.getJSONObject("location");
-        /* System.out.println(geometry);*/
         BigDecimal lng = geometry.getBigDecimal("lng");
         BigDecimal lat = geometry.getBigDecimal("lat");
         String location = lng.toString() + "  " + lat.toString();
@@ -115,6 +107,7 @@ return null;
         System.out.println(lat);
 
         JSONObject jsonObject = new JSONObject(geometry);
+
         return geometry.toString();
     }
 }
